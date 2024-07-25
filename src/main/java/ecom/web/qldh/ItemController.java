@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/v1.0/items")
+@CrossOrigin("http://localhost:3000")
 public class ItemController {
     private final ItemService itemService;
     @GetMapping("/find-all")

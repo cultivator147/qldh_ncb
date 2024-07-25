@@ -30,11 +30,14 @@ public class Item {
 
     @Column(name = "order_image")
     @Convert(converter = StringListConverter.class)
-    private List<String> orderImage = new ArrayList<>();
+        private List<String> orderImage = new ArrayList<>();
 
     @Column(name = "status")
     private Integer status;
 
     @Column(name = "price")
     private Long price;
+
+    @Column(name = "item_description")
+    private Long itemDescription;
 }
