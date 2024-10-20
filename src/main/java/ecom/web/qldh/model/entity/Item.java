@@ -26,7 +26,7 @@ public class Item {
     private String phoneNumber;
 
     @Column(name = "date_time")
-    private Long datetime;
+    private Long dateTime;
 
     @Column(name = "order_image")
     @Convert(converter = StringListConverter.class)
@@ -40,4 +40,7 @@ public class Item {
 
     @Column(name = "item_description")
     private String itemDescription;
+
+    @Column(name = "item_name")
+    private String itemName;
 }

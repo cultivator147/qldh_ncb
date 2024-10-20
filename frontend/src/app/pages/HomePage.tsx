@@ -100,9 +100,9 @@ export const HomePage = () => {
             
             {"Xác nhận"}
           </ChooseButton>
+
           </div>
-        </div>
-        <div>
+          <div style={{marginLeft: '64px'}}>
         <ChooseButton 
           onClick={() => {onClickShowInsertOrderModal()}}
           >
@@ -113,7 +113,9 @@ export const HomePage = () => {
             {"Thêm đơn hàng"}
           </ChooseButton>
         </div>
-        <div>
+        </div>
+        
+        <div >
           <TableOrders page={1} size={10} items={items} />
         </div>
         <InsertItemModal

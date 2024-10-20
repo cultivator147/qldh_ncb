@@ -4,24 +4,28 @@ import { Flex, Select, Text, TextInput, Title } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { uploadImage } from "../../api/imageUploader";
 import { StyledImage } from "../common/StyledImage";
-import { insertItem } from "../../api/apis";
+import { insertItem, updateItem } from "../../api/apis";
 import { IconHash } from "@tabler/icons-react";
 
-export const InsertItemModal = ({ isShowing, hide }: any) => {
-  const [buyerName, setBuyerName] = useState("");
-  const [buyerAddress, setBuyerAddress] = useState("");
-  const [phoneNumber, setphoneNumber] = useState("");
-  const [itemDescription, setitemDescription] = useState("");
-  const [itemName, setItemName] = useState("");
-  const [price, setprice] = useState(0);
-  const [dateTime, setdateTime] = useState("");
-  const [status, setstatus] = useState(1);
-
-  const [fileUrls, setFileUrls] = useState<string[]>([]);
-  const callApiInsertItem = async () => {
+export const UpdateItemModal = ({ isShowing, hide, idInit, buyerNameInit, buyerAddressInit,
+   phoneNumberInit, itemDescriptionInit, itemNameInit, priceInit,
+    dateTimeInit, statusInit, fileUrlsInit
+   }: any) => {
+  console.log("buyer: "+ buyerNameInit);
+  const [id, setId] = useState(idInit);
+  const [buyerName, setBuyerName] = useState(buyerNameInit);
+  const [buyerAddress, setBuyerAddress] = useState(buyerAddressInit);
+  const [phoneNumber, setphoneNumber] = useState(phoneNumberInit);
+  const [itemDescription, setitemDescription] = useState(itemDescriptionInit);
+  const [itemName, setItemName] = useState(itemNameInit);
+  const [price, setprice] = useState(priceInit || 0);
+  const [dateTime, setdateTime] = useState(dateTimeInit);
+  const [status, setstatus] = useState(statusInit || 1);
+  const [fileUrls, setFileUrls] = useState<string[]>(fileUrlsInit || []);
+  const callApiUpdateItem = async () => {
     try{
-      await insertItem({
-        id:  null,
+      await updateItem({
+        id:  id,
         buyerName: buyerName,
         buyerAddress: buyerAddress,
         phoneNumber: phoneNumber,
@@ -49,7 +53,7 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
   };
 
   const onCompletedInsertOrder = async () => {
-    await callApiInsertItem();
+    await callApiUpdateItem();
     hide();
   };
   const setItemStatus = (v: any) => {
@@ -122,10 +126,10 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
               top: 0,
               height: "2.5rem",
               width: "2.5rem",
-              backgroundColor: "#fcfbfb",
+              backgroundColor: "#f5eeee",
             }}
           >
-            <FontAwesomeIcon cursor={"pointer"} icon={faClose} color="red" />
+            <FontAwesomeIcon cursor={"pointer"} icon={faClose}  color="red"  />
           </Flex>
           <div
             style={{
@@ -136,7 +140,7 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
             }}
           />
         </Flex>
-        <div style={{ marginTop: "5rem", marginBottom: "5rem", display: 'flex', flexDirection: 'column',  gap: '16px', padding: '28px'}}>
+        <div style={{ marginTop: "5rem", marginBottom: "5rem", display: 'flex', flexDirection: 'column',  gap: '16px'}}>
           <Flex style={{}}>
             <Flex align={"center"} style={{ width: "25%" }}>
               <Text
@@ -334,7 +338,7 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
                 fz="xl"
                 fw={500}
               >
-                {"Trạng thái:"}
+                {"Trạng thái: "}
               </Text>
             </Flex>
               
@@ -390,7 +394,7 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
             }}
           >
             {"Xác nhận"}
-          </button>
+          </button> 
           <button className="btn-closed" onClick={hide} style={{cursor: "pointer"}}>
             {"Đóng"}
           </button>

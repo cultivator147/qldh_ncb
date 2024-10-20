@@ -7,5 +7,6 @@ export interface ItemProps{
     orderImage: any;
     status: any;
     price: any;
+    itemName: any;
     itemDescription: any;
 }
