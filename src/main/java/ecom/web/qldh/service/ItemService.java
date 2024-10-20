@@ -16,6 +16,9 @@ public class ItemService {
     }
 
     public List<Item> findByStatus(int status){
+        if(status == 0){
+            return itemRepository.findAll();
+        }
         return itemRepository.findAll().stream().filter(item -> item.getStatus().equals(status)).toList();
     }
     public Item updateOrder(Item item){

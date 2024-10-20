@@ -22,7 +22,20 @@ export const HomePage = () => {
   const [itemStatus, setItemStatus] = useState(0);
   const [items, setItems] = useState<OrderDetail[]>([]);
   const setFilterStatus = (value: any) => {
-    setItemStatus(value);
+    switch(value){
+      case "Chưa đặt hàng":
+        setItemStatus(1);
+        break;
+      case "Đã đặt hàng":
+        setItemStatus(2);
+        break;  
+      case "Đã gửi hàng":
+        setItemStatus(3);
+        break;
+      default:
+        setItemStatus(0);
+        break;  
+    }
   }
   const onClickShowInsertOrderModal = () => {
     setIsShowing(true);
@@ -31,6 +44,14 @@ export const HomePage = () => {
     setIsShowing(false);
     const getStory = async () => {
       const response = await request.get("/v1.0/items/find-all");
+      const data: OrderDetail[] = response?.data?.data || [];
+      setItems(data);
+    }
+    getStory();
+  }
+  const fetchByStatus  = async () => {
+    const getStory = async () => {
+      const response = await request.get("/v1.0/items/find-by-status?status=" + itemStatus);
       const data: OrderDetail[] = response?.data?.data || [];
       setItems(data);
     }
@@ -46,11 +67,11 @@ export const HomePage = () => {
   }, [])
   return (
     <div style={{ width: "100%", minHeight: '100vh', display: "flex" }}>
-      <div className='sidebar' style={{ width: '20%', minHeight: '100vh', height: '100%', backgroundColor: 'antiquewhite' }}>
+      {/* <div className='sidebar' style={{ width: '20%', minHeight: '100vh', height: '100%', backgroundColor: 'antiquewhite' }}>
         <div className='sidebar-list'>
           {SidebarData.map((data) => (<SidebarItem title={data.title} icon={data.icon} link={data.link} />))}
         </div>
-      </div>
+      </div> */}
 
       <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', padding: '8px' }}>
         <div style={{ display: 'flex', backgroundColor: '#ffffff', width: '100%', justifyItems: 'center', justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
@@ -72,8 +93,18 @@ export const HomePage = () => {
             transitionTimingFunction="ease"
             icon={<IconHash />}
           />
+          <div>
           <ChooseButton 
-          onClick={onClickShowInsertOrderModal}
+          onClick={() => {fetchByStatus()}}
+          >
+            
+            {"Xác nhận"}
+          </ChooseButton>
+          </div>
+        </div>
+        <div>
+        <ChooseButton 
+          onClick={() => {onClickShowInsertOrderModal()}}
           >
           <FontAwesomeIcon
                 icon={faAdd}
@@ -82,7 +113,6 @@ export const HomePage = () => {
             {"Thêm đơn hàng"}
           </ChooseButton>
         </div>
-
         <div>
           <TableOrders page={1} size={10} items={items} />
         </div>
