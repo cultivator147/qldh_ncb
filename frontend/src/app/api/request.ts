@@ -4,5 +4,13 @@ const request = axios.create({
     timeout: 20000,
     headers: {'Content-Type': 'application/json'},
 });
-
+export const uploadImageToImgBB = (params: any) =>
+    request({
+      baseURL: 'https://api.imgbb.com/1/upload',
+      method: 'post',
+      data: params,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
 export default request;

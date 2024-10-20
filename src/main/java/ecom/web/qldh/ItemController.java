@@ -28,6 +28,10 @@ public class ItemController {
     ResponseEntity<ResponseData<Item>> updateItem(@RequestBody Item item) {
         return BaseResponse.success(itemService.updateOrder(item));
     }
+    @PostMapping("/insert")
+    ResponseEntity<ResponseData<Item>> insertItem(@RequestBody Item item) {
+        return BaseResponse.success(itemService.insertOrder(item));
+    }
     @PostMapping("/delete")
     ResponseEntity<ResponseData<Item>> deleteItem(@RequestBody Item item) {
         return BaseResponse.success(itemService.deleteItem(item));

@@ -21,6 +21,11 @@ public class ItemService {
     public Item updateOrder(Item item){
         return itemRepository.save(item);
     }
+    public Item insertOrder(Item item){
+        item.setId(null);
+        item.setDatetime(System.currentTimeMillis());
+        return itemRepository.save(item);
+    }
     public Item deleteItem(Item item){
         itemRepository.delete(item);
         return item;

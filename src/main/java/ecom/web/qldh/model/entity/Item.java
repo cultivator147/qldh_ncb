@@ -13,7 +13,7 @@ import java.util.List;
 public class Item {
     @Id
     @Column(name = "id")
-    @GeneratedValue
+    @GeneratedValue()
     private Long id;
 
     @Column(name = "buyer_name")
@@ -39,5 +39,5 @@ public class Item {
     private Long price;
 
     @Column(name = "item_description")
-    private Long itemDescription;
+    private String itemDescription;
 }
