@@ -6,6 +6,7 @@ export interface ItemProps{
     datetime: any;
     orderImage: any;
     status: any;
+    platform: any;
     price: any;
     itemName: any;
     itemDescription: any;

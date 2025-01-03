@@ -9,7 +9,7 @@ import { IconHash } from "@tabler/icons-react";
 
 export const UpdateItemModal = ({ isShowing, hide, idInit, buyerNameInit, buyerAddressInit,
    phoneNumberInit, itemDescriptionInit, itemNameInit, priceInit,
-    dateTimeInit, statusInit, fileUrlsInit
+    dateTimeInit, statusInit, platformInit, fileUrlsInit
    }: any) => {
   console.log("buyer: "+ buyerNameInit);
   const [id, setId] = useState(idInit);
@@ -21,6 +21,7 @@ export const UpdateItemModal = ({ isShowing, hide, idInit, buyerNameInit, buyerA
   const [price, setprice] = useState(priceInit || 0);
   const [dateTime, setdateTime] = useState(dateTimeInit);
   const [status, setstatus] = useState(statusInit || 1);
+  const [platform, setPlatform] = useState(platformInit || "Tiktok")
   const [fileUrls, setFileUrls] = useState<string[]>(fileUrlsInit || []);
   const callApiUpdateItem = async () => {
     try{
@@ -32,6 +33,7 @@ export const UpdateItemModal = ({ isShowing, hide, idInit, buyerNameInit, buyerA
         datetime: dateTime,
         orderImage: fileUrls,
         status: status,
+        platform: platform,
         price: price,
         itemName: itemName,
         itemDescription: itemDescription
@@ -66,6 +68,18 @@ export const UpdateItemModal = ({ isShowing, hide, idInit, buyerNameInit, buyerA
     if(v == "Đã gửi hàng"){
       setstatus(3);
     }
+  };
+  const setItemPlatform = (v: any) => {
+    if (v == "Tiktok"){
+      setPlatform("Tiktok");
+    }
+    if (v == "Zalo"){
+      setPlatform("Zalo");
+    }
+    if (v == "Instagram"){
+      setPlatform("Instagram");
+    }
+
   }
   return isShowing ? (
     <Flex
@@ -111,7 +125,7 @@ export const UpdateItemModal = ({ isShowing, hide, idInit, buyerNameInit, buyerA
             <h1
             style={{color: '#000000'}}
             >
-            Thêm đơn hàng
+            Chỉnh sửa đơn hàng
             </h1>
           </Flex>
           <Flex
@@ -352,6 +366,33 @@ export const UpdateItemModal = ({ isShowing, hide, idInit, buyerNameInit, buyerA
             icon={<IconHash />}
           />
           </Flex>
+
+          <Flex style={{width: '80%'}}>
+            <Flex align={"center"} style={{ width: "25%" }}>
+              <Text
+                style={{ marginLeft: "2px" }}
+                // variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+                sx={{ fontFamily: "Greycliff CF, sans-serif" }}
+                ta="center"
+                fz="xl"
+                fw={500}
+              >
+                {"Nền tảng: "}
+              </Text>
+            </Flex>
+              
+              <Select
+            onChange={(v) => {setItemPlatform(v)}}
+            placeholder="Chọn giá trị"
+            data={["Tiktok",  "Zalo", "Instagram"]}
+            transitionDuration={150}
+            transition="pop-top-left"
+            transitionTimingFunction="ease"
+            icon={<IconHash />}
+          />
+          </Flex>
+
           <Flex  style={{width: '100%'}}>
             <Flex align={"center"} style={{ width: "25%" }}>
               <Text

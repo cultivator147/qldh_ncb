@@ -43,4 +43,7 @@ public class Item {
 
     @Column(name = "item_name")
     private String itemName;
+
+    @Column(name = "platform")
+    private String platform;
 }

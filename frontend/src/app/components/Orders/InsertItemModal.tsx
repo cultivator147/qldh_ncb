@@ -16,6 +16,7 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
   const [price, setprice] = useState(0);
   const [dateTime, setdateTime] = useState("");
   const [status, setstatus] = useState(1);
+  const [platform, setPlatform] = useState("Tiktok");
 
   const [fileUrls, setFileUrls] = useState<string[]>([]);
   const callApiInsertItem = async () => {
@@ -28,6 +29,7 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
         datetime: dateTime,
         orderImage: fileUrls,
         status: status,
+        platform: platform,
         price: price,
         itemName: itemName,
         itemDescription: itemDescription
@@ -62,6 +64,18 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
     if(v == "Đã gửi hàng"){
       setstatus(3);
     }
+  }
+  const setItemPlatform = (v: any) => {
+    if (v == "Tiktok"){
+      setPlatform("Tiktok");
+    }
+    if (v == "Zalo"){
+      setPlatform("Zalo");
+    }
+    if (v == "Instagram"){
+      setPlatform("Instagram");
+    }
+
   }
   return isShowing ? (
     <Flex
@@ -348,6 +362,33 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
             icon={<IconHash />}
           />
           </Flex>
+
+          <Flex style={{width: '80%'}}>
+            <Flex align={"center"} style={{ width: "25%" }}>
+              <Text
+                style={{ marginLeft: "2px" }}
+                // variant="gradient"
+                gradient={{ from: "indigo", to: "cyan", deg: 45 }}
+                sx={{ fontFamily: "Greycliff CF, sans-serif" }}
+                ta="center"
+                fz="xl"
+                fw={500}
+              >
+                {"Nền tảng: "}
+              </Text>
+            </Flex>
+              
+              <Select
+            onChange={(v) => {setItemPlatform(v)}}
+            placeholder="Chọn giá trị"
+            data={["Tiktok",  "Zalo", "Instagram"]}
+            transitionDuration={150}
+            transition="pop-top-left"
+            transitionTimingFunction="ease"
+            icon={<IconHash />}
+          />
+          </Flex>
+
           <Flex  style={{width: '100%'}}>
             <Flex align={"center"} style={{ width: "25%" }}>
               <Text

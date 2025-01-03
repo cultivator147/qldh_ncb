@@ -5,6 +5,7 @@ import ecom.web.qldh.service.ItemService;
 import ecom.web.qldh.util.BaseResponse;
 import ecom.web.qldh.util.ResponseData;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +18,15 @@ import java.util.List;
 public class ItemController {
     private final ItemService itemService;
     @GetMapping("/find-all")
-    ResponseEntity<ResponseData<List<Item>>> getListItems() {
-        return BaseResponse.success(itemService.getListService());
+    ResponseEntity<ResponseData<Page<Item>>> getListItems(@RequestParam (name = "page", defaultValue = "0") int page,
+                                                          @RequestParam (name = "size", defaultValue = "10") int size) {
+        return BaseResponse.success(itemService.getListService(page, size));
     }
     @GetMapping("/find-by-status")
-    ResponseEntity<ResponseData<List<Item>>> findByStatus(@RequestParam(name = "status", defaultValue = "1") int status) {
-        return BaseResponse.success(itemService.findByStatus(status));
+    ResponseEntity<ResponseData<Page<Item>>> findByStatus(@RequestParam(name = "status", defaultValue = "1") int status,
+                                                          @RequestParam (name = "page", defaultValue = "0") int page,
+                                                          @RequestParam (name = "size", defaultValue = "10") int size) {
+        return BaseResponse.success(itemService.findByStatus(status, page, size));
     }
     @PostMapping("/update")
     ResponseEntity<ResponseData<Item>> updateItem(@RequestBody Item item) {
