@@ -246,12 +246,13 @@ export const HomePage = () => {
             flexDirection: "row",
             marginLeft: "100px",
             marginTop: "42px",
+            gap: '8px'
           }}
         >
-          <label style={{ fontSize: "1.5rem", color: "red" }}>
+          <label style={{ fontSize: "1.5rem", color: "#b42f2f" }}>
             {"Tổng húp: "}
           </label>
-          <label style={{ fontSize: "1.5rem" }}>
+          <label style={{ fontSize: "1.5rem", fontWeight:"bold" }}>
             {formatCurrency(totalMoney)}
           </label>
         </div>

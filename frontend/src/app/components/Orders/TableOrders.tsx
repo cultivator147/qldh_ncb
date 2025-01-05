@@ -59,7 +59,7 @@ export const TableOrders = (props: TableOrderData) => {
       return "#dfd7c8"
     }
     if(p == "Zalo"){
-      return "#5a6bb8"
+      return "#72a5d8"
     }
     if(p == "Instagram"){
       return "#df92cb"

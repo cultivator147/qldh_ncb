@@ -26,7 +26,7 @@ public class ItemJDBCRepository extends BaseRepository{
         };
         StringBuilder query = new StringBuilder("""
                 WITH RankedItems AS (
-                    SELECT *, ROW_NUMBER() OVER (ORDER BY id) AS rowNum
+                    SELECT *, ROW_NUMBER() OVER (ORDER BY date_time DESC) AS rowNum
                     FROM item
                     WHERE (CASE WHEN :status = 0 THEN :status ELSE status END) = :status
                         AND (CASE WHEN :platform = '0' THEN :platform ELSE platform END) = :platform
