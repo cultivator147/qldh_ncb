@@ -16,7 +16,7 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
   const [price, setprice] = useState(0);
   const [dateTime, setdateTime] = useState("");
   const [status, setstatus] = useState(1);
-  const [platform, setPlatform] = useState("Tiktok");
+  const [platform, setPlatform] = useState("Facebook");
 
   const [fileUrls, setFileUrls] = useState<string[]>([]);
   const callApiInsertItem = async () => {
@@ -66,8 +66,8 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
     }
   }
   const setItemPlatform = (v: any) => {
-    if (v == "Tiktok"){
-      setPlatform("Tiktok");
+    if (v == "Facebook"){
+      setPlatform("Facebook");
     }
     if (v == "Zalo"){
       setPlatform("Zalo");
@@ -381,7 +381,7 @@ export const InsertItemModal = ({ isShowing, hide }: any) => {
               <Select
             onChange={(v) => {setItemPlatform(v)}}
             placeholder="Chọn giá trị"
-            data={["Tiktok",  "Zalo", "Instagram"]}
+            data={["Facebook",  "Zalo", "Instagram"]}
             transitionDuration={150}
             transition="pop-top-left"
             transitionTimingFunction="ease"

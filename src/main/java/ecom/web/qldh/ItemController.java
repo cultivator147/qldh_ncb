@@ -24,10 +24,10 @@ public class ItemController {
                                                                      @RequestParam (name = "size", defaultValue = "10") int size,
                                                                      @RequestParam (name = "itemStatus", defaultValue = "0") int itemStatus,
                                                                      @RequestParam (name = "statisticStatus", defaultValue = "0") int statisticStatus,
-                                                                     @RequestParam (name = "platform", defaultValue = "0") String platform
-
+                                                                     @RequestParam (name = "platform", defaultValue = "0") String platform,
+                                                                     @RequestParam (name = "phone", defaultValue = "0") String phone
                                                           ) {
-        return BaseResponse.success(itemService.getListService(page, size, itemStatus, statisticStatus, platform));
+        return BaseResponse.success(itemService.getListService(page, size, itemStatus, statisticStatus, platform, phone));
     }
     @PostMapping("/update")
     ResponseEntity<ResponseData<Item>> updateItem(@RequestBody Item item) {

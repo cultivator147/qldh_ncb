@@ -21,7 +21,7 @@ export const UpdateItemModal = ({ isShowing, hide, idInit, buyerNameInit, buyerA
   const [price, setprice] = useState(priceInit || 0);
   const [dateTime, setdateTime] = useState(dateTimeInit);
   const [status, setstatus] = useState(statusInit || 1);
-  const [platform, setPlatform] = useState(platformInit || "Tiktok")
+  const [platform, setPlatform] = useState(platformInit || "Facebook")
   const [fileUrls, setFileUrls] = useState<string[]>(fileUrlsInit || []);
   const callApiUpdateItem = async () => {
     try{
@@ -70,8 +70,8 @@ export const UpdateItemModal = ({ isShowing, hide, idInit, buyerNameInit, buyerA
     }
   };
   const setItemPlatform = (v: any) => {
-    if (v == "Tiktok"){
-      setPlatform("Tiktok");
+    if (v == "Facebook"){
+      setPlatform("Facebook");
     }
     if (v == "Zalo"){
       setPlatform("Zalo");
@@ -385,7 +385,7 @@ export const UpdateItemModal = ({ isShowing, hide, idInit, buyerNameInit, buyerA
               <Select
             onChange={(v) => {setItemPlatform(v)}}
             placeholder="Chọn giá trị"
-            data={["Tiktok",  "Zalo", "Instagram"]}
+            data={["Facebook",  "Zalo", "Instagram"]}
             transitionDuration={150}
             transition="pop-top-left"
             transitionTimingFunction="ease"

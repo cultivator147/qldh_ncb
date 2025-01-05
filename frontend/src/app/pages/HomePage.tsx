@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { OrderDetail, TableOrders } from "../components/Orders/TableOrders";
 import request from "../api/request";
 import {
@@ -12,7 +12,7 @@ import {
 } from "@tabler/icons-react";
 import { SidebarData, SidebarItem } from "../components/sidebar/SidebarItem";
 import "../../App.css";
-import { Menu, Select, Title } from "@mantine/core";
+import { Menu, Select, TextInput, Title } from "@mantine/core";
 import { ChooseButton } from "../components/common/StyledChooseButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ReactPaginate from "react-paginate";
@@ -42,6 +42,9 @@ export const HomePage = () => {
   const [platform, setPlatform] = useState("Tất cả");
   const [totalMoney, setTotalMoney] = useState(0);
   const [items, setItems] = useState<OrderDetail[]>([]);
+
+  const inputContent = useRef(null);
+  const [phoneText, setPhoneText] = useState("0");
   const setFilterStatus = (value: any) => {
     switch (value) {
       case "Chưa đặt hàng":
@@ -103,9 +106,10 @@ export const HomePage = () => {
   const getStory = async () => {
     console.log("cr" + currentPage);
     const response = await request.get(
-      `/v1.0/items/find-all?page=${currentPage}&size=10&itemStatus=${itemStatus}&statisticStatus=${statisticStatus}&platform=${platform}`
+      `/v1.0/items/find-all?page=${currentPage}&size=10&itemStatus=${itemStatus}&statisticStatus=${statisticStatus}&platform=${platform}&phone=${phoneText}`
     );
     const data: OrderDetail[] = response?.data?.data?.content || [];
+    const totalPages = response?.data?.data?.totalPage;
     setTotalMoney(response?.data?.data?.totalMoney || 0);
     setTotalPages(totalPages);
     setItems(data);
@@ -231,7 +235,7 @@ export const HomePage = () => {
                 castPlatform(v);
               }}
               placeholder="Chọn giá trị"
-              data={["Tất cả", "Tiktok", "Instagram", "Zalo"]}
+              data={["Tất cả", "Facebook", "Instagram", "Zalo"]}
               transitionDuration={150}
               transition="pop-top-left"
               transitionTimingFunction="ease"
@@ -256,6 +260,41 @@ export const HomePage = () => {
             {formatCurrency(totalMoney)}
           </label>
         </div>
+
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            marginLeft: "100px",
+            marginTop: "42px",
+            gap: '8px',
+            alignItems: 'center'
+          }}
+        >
+          <label style={{ fontSize: "1.5rem", color: "#b42f2f" }}>
+            {"Tìm SĐT: "}
+          </label>
+          <TextInput 
+              onChange={(event) => setPhoneText(event.currentTarget.value)}
+              ref={inputContent}
+
+          style={{ fontSize: "1.5rem", fontWeight:"bold" }}
+          >
+          </TextInput>
+
+          <div>
+              <ChooseButton
+                onClick={() => {
+                  getStory();
+                }}
+              >
+                {"Tìm kiếm"}
+              </ChooseButton>
+            </div>
+        </div>
+
+
         <div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <ReactPaginate

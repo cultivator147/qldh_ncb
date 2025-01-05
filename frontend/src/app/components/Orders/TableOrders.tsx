@@ -55,7 +55,7 @@ export const TableOrders = (props: TableOrderData) => {
     setIsShowing(false);
   }
   const backgroundColor = (p: string) => {
-    if(p == "Tiktok"){
+    if(p == "Facebook"){
       return "#dfd7c8"
     }
     if(p == "Zalo"){

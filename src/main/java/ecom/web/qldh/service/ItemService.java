@@ -21,8 +21,8 @@ import java.util.stream.Collectors;
 public class ItemService {
     private final ItemRepository itemRepository;
     private final ItemJDBCRepository itemJDBCRepository;
-    public PageItem<ItemPerPage> getListService(int page, int size, int itemStatus, int statisticStatus, String platform){
-        return itemJDBCRepository.getPageItem(page, size, itemStatus, statisticStatus, platform);
+    public PageItem<ItemPerPage> getListService(int page, int size, int itemStatus, int statisticStatus, String platform, String phone){
+        return itemJDBCRepository.getPageItem(page, size, itemStatus, statisticStatus, platform, phone);
     }
 
 
