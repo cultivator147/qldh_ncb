@@ -17,6 +17,7 @@
 	<licenses>
 		<license/>
 	</licenses>
+	<packaging>jar</packaging>
 	<developers>
 		<developer/>
 	</developers>
@@ -65,4 +66,26 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<mainClass>ecom.web.qldh.QldhApplication</mainClass> <!-- Thay thế bằng lớp chính của bạn -->
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

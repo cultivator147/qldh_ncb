@@ -116,7 +116,7 @@ export const TableOrders = (props: TableOrderData) => {
                   <Text>{`${item.phoneNumber}`}</Text>
                 </Flex>
               </td>
-              <td style={{ padding: "8px", border: "1px solid #000000" }}>
+              <td style={{width: '8rem', padding: "8px", border: "1px solid #000000" }}>
                 <Flex direction={"column"} style={{justifyItems: 'center', alignItems: 'center',}}>
                   <Text>{`${item.buyerAddress}`}</Text>
                 </Flex>
@@ -133,7 +133,7 @@ export const TableOrders = (props: TableOrderData) => {
               </td>
               <td
                 style={{
-                  width: '24rem', 
+                  width: '18rem', 
                   height: "128px",
                   padding: "8px",
                   border: "1px solid #000000",

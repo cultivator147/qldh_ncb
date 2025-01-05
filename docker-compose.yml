@@ -1,0 +1,38 @@
+services:
+  app:
+    image: openjdk:17-jdk
+    container_name: qldh_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8805:8805"
+    environment:
+      SPRING_APPLICATION_NAME: qldh
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/qldh
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 1234
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: true
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:latest
+    container_name: qldh_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: qldh
+    ports:
+      - "3306:3306"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: qldh_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - app
+    command: ["npm", "start"]

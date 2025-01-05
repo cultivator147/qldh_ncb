@@ -1,6 +1,8 @@
 package ecom.web.qldh;
 
 import ecom.web.qldh.model.entity.Item;
+import ecom.web.qldh.page.ItemPerPage;
+import ecom.web.qldh.page.PageItem;
 import ecom.web.qldh.service.ItemService;
 import ecom.web.qldh.util.BaseResponse;
 import ecom.web.qldh.util.ResponseData;
@@ -18,15 +20,14 @@ import java.util.List;
 public class ItemController {
     private final ItemService itemService;
     @GetMapping("/find-all")
-    ResponseEntity<ResponseData<Page<Item>>> getListItems(@RequestParam (name = "page", defaultValue = "0") int page,
-                                                          @RequestParam (name = "size", defaultValue = "10") int size) {
-        return BaseResponse.success(itemService.getListService(page, size));
-    }
-    @GetMapping("/find-by-status")
-    ResponseEntity<ResponseData<Page<Item>>> findByStatus(@RequestParam(name = "status", defaultValue = "1") int status,
-                                                          @RequestParam (name = "page", defaultValue = "0") int page,
-                                                          @RequestParam (name = "size", defaultValue = "10") int size) {
-        return BaseResponse.success(itemService.findByStatus(status, page, size));
+    ResponseEntity<ResponseData<PageItem<ItemPerPage>>> getListItems(@RequestParam (name = "page", defaultValue = "0") int page,
+                                                                     @RequestParam (name = "size", defaultValue = "10") int size,
+                                                                     @RequestParam (name = "itemStatus", defaultValue = "0") int itemStatus,
+                                                                     @RequestParam (name = "statisticStatus", defaultValue = "0") int statisticStatus,
+                                                                     @RequestParam (name = "platform", defaultValue = "0") String platform
+
+                                                          ) {
+        return BaseResponse.success(itemService.getListService(page, size, itemStatus, statisticStatus, platform));
     }
     @PostMapping("/update")
     ResponseEntity<ResponseData<Item>> updateItem(@RequestBody Item item) {
